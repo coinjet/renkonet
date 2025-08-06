@@ -1,11 +1,17 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
   "headers": [
+    {
+      "source": "/(.*\\.js)",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" }
+      ]
+    },
+    {
+      "source": "/(.*\\.css)",
+      "headers": [
+        { "key": "Content-Type", "value": "text/css" }
+      ]
+    },
     {
       "source": "/sw.js",
       "headers": [
@@ -13,9 +19,9 @@
       ]
     },
     {
-      "source": "/(.*\\.js)",
+      "source": "/(.*\\.(woff|woff2|eot|ttf|otf))",
       "headers": [
-        { "key": "Content-Type", "value": "application/javascript" }
+        { "key": "Content-Type", "value": "font/" }
       ]
     }
   ]
