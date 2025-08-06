@@ -11,6 +11,7 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'dist', // ✅ Esto le indica a Vercel dónde están los archivos finales
     rollupOptions: {
       output: {
         manualChunks: {
@@ -40,4 +41,3 @@ export default defineConfig({
     port: 3000
   }
 })
-
