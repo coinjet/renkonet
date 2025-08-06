@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="description" content="RenkoNet - Red social completa con todas las funciones de Instagram" />
+    <meta name="keywords" content="red social, instagram, posts, mensajes, historias, verificación" />
+    <meta name="author" content="RenkoNet Team" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Apple PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="RenkoNet" />
+    <link rel="apple-touch-icon" href="/icon-192x192.png" />
+    
+    <!-- Microsoft PWA Meta Tags -->
+    <meta name="msapplication-TileImage" content="/icon-144x144.png" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RenkoNet - Red Social" />
+    <meta property="og:description" content="Red social completa con todas las funciones de Instagram" />
+    <meta property="og:image" content="/icon-512x512.png" />
+    <meta property="og:url" content="https://renkonet.vercel.app" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RenkoNet - Red Social" />
+    <meta name="twitter:description" content="Red social completa con todas las funciones de Instagram" />
+    <meta name="twitter:image" content="/icon-512x512.png" />
+    
+    <title>RenkoNet - Red Social</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://yrokptdcmwqvimqlhaac.supabase.co" />
+    <link rel="dns-prefetch" href="https://yrokptdcmwqvimqlhaac.supabase.co" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registrado con éxito: ', registration.scope);
+            })
+            .catch((registrationError) => {
+              console.log('SW falló al registrarse: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PWA Install Prompt -->
+    <script>
+      let deferredPrompt;
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevenir que Chrome 67 y anteriores muestren automáticamente el prompt
+        e.preventDefault();
+        // Guardar el evento para que pueda ser activado después
+        deferredPrompt = e;
+        
+        // Mostrar botón de instalación personalizado
+        const installButton = document.createElement('button');
+        installButton.textContent = 'Instalar App';
+        installButton.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: #2563eb;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          z-index: 1000;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        `;
+        
+        installButton.addEventListener('click', () => {
+          // Ocultar el botón
+          installButton.style.display = 'none';
+          // Mostrar el prompt
+          deferredPrompt.prompt();
+          // Esperar a que el usuario responda al prompt
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('Usuario aceptó la instalación');
+            } else {
+              console.log('Usuario rechazó la instalación');
+            }
+            deferredPrompt = null;
+          });
+        });
+        
+        // Solo mostrar si no está ya instalado
+        if (!window.matchMedia('(display-mode: standalone)').matches) {
+          document.body.appendChild(installButton);
+          
+          // Ocultar después de 10 segundos
+          setTimeout(() => {
+            if (installButton.parentNode) {
+              installButton.remove();
+            }
+          }, 10000);
+        }
+      });
+      
+      // Detectar si la app ya está instalada
+      window.addEventListener('appinstalled', (evt) => {
+        console.log('App instalada exitosamente');
+      });
+    </script>
+  </body>
+</html>
+
