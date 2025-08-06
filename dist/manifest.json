@@ -1,15 +1,11 @@
 {
-  "name": "RenkoNet - Red Social",
+  "name": "RenkoNet",
   "short_name": "RenkoNet",
-  "description": "Red social completa con todas las funciones de Instagram",
+  "description": "Tu nueva red social completa",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#2563eb",
-  "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "es",
-  "categories": ["social", "networking", "communication"],
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "/icon-72x72.png",
@@ -74,43 +70,16 @@
       ]
     },
     {
-      "name": "Mensajes",
-      "short_name": "Mensajes",
-      "description": "Ver mensajes directos",
-      "url": "/messages",
+      "name": "Explorar",
+      "short_name": "Explorar",
+      "description": "Descubrir contenido trending",
+      "url": "/?action=explore",
       "icons": [
         {
           "src": "/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
-    },
-    {
-      "name": "Perfil",
-      "short_name": "Perfil",
-      "description": "Ver mi perfil",
-      "url": "/profile",
-      "icons": [
-        {
-          "src": "/icon-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/screenshot-mobile.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "/screenshot-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
     }
   ]
 }
-
