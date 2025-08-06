@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*\\.js)",
@@ -19,6 +25,12 @@
       ]
     },
     {
+      "source": "/(.*\\.(png|jpg|jpeg|gif|svg|ico))",
+      "headers": [
+        { "key": "Content-Type", "value": "image/" }
+      ]
+    },
+    {
       "source": "/(.*\\.(woff|woff2|eot|ttf|otf))",
       "headers": [
         { "key": "Content-Type", "value": "font/" }
@@ -26,4 +38,5 @@
     }
   ]
 }
+
 
