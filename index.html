@@ -47,34 +47,19 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     
-    <!-- Service Worker Registration -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-              console.log('SW registrado con éxito: ', registration.scope);
-            })
-            .catch((registrationError) => {
-              console.log('SW falló al registrarse: ', registrationError);
-            });
-        });
-      }
-    </script>
-    
     <!-- PWA Install Prompt -->
     <script>
       let deferredPrompt;
       
-      window.addEventListener('beforeinstallprompt', (e) => {
+      window.addEventListener("beforeinstallprompt", (e ) => {
         // Prevenir que Chrome 67 y anteriores muestren automáticamente el prompt
         e.preventDefault();
         // Guardar el evento para que pueda ser activado después
         deferredPrompt = e;
         
         // Mostrar botón de instalación personalizado
-        const installButton = document.createElement('button');
-        installButton.textContent = 'Instalar App';
+        const installButton = document.createElement("button");
+        installButton.textContent = "Instalar App";
         installButton.style.cssText = `
           position: fixed;
           bottom: 20px;
@@ -90,24 +75,24 @@
           box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         `;
         
-        installButton.addEventListener('click', () => {
+        installButton.addEventListener("click", () => {
           // Ocultar el botón
-          installButton.style.display = 'none';
+          installButton.style.display = "none";
           // Mostrar el prompt
           deferredPrompt.prompt();
           // Esperar a que el usuario responda al prompt
           deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('Usuario aceptó la instalación');
+            if (choiceResult.outcome === "accepted") {
+              console.log("Usuario aceptó la instalación");
             } else {
-              console.log('Usuario rechazó la instalación');
+              console.log("Usuario rechazó la instalación");
             }
             deferredPrompt = null;
           });
         });
         
         // Solo mostrar si no está ya instalado
-        if (!window.matchMedia('(display-mode: standalone)').matches) {
+        if (!window.matchMedia("(display-mode: standalone)").matches) {
           document.body.appendChild(installButton);
           
           // Ocultar después de 10 segundos
@@ -120,10 +105,9 @@
       });
       
       // Detectar si la app ya está instalada
-      window.addEventListener('appinstalled', (evt) => {
-        console.log('App instalada exitosamente');
+      window.addEventListener("appinstalled", (evt) => {
+        console.log("App instalada exitosamente");
       });
     </script>
   </body>
 </html>
-
