@@ -19,12 +19,6 @@
       ]
     },
     {
-      "source": "/sw.js",
-      "headers": [
-        { "key": "Content-Type", "value": "application/javascript" }
-      ]
-    },
-    {
       "source": "/(.*\\.(png|jpg|jpeg|gif|svg|ico))",
       "headers": [
         { "key": "Content-Type", "value": "image/" }
